@@ -693,16 +693,6 @@ RSpec.describe Article, type: :model do
         article.update(published: false)
       end
     end
-
-    it "triggers auto removal from index on destroy" do
-      article = create(:article)
-
-      allow(article).to receive(:remove_from_index!)
-      allow(article).to receive(:delete_related_objects)
-      article.destroy
-      expect(article).to have_received(:remove_from_index!)
-      expect(article).to have_received(:delete_related_objects)
-    end
   end
 
   context "when callbacks are triggered before save" do
